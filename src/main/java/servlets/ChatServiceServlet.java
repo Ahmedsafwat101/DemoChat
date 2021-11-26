@@ -1,3 +1,5 @@
+package servlets;
+
 import entites.Message;
 import entites.User;
 import jakarta.servlet.ServletException;
