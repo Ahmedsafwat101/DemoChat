@@ -30,21 +30,16 @@ public class ChatServiceServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
         // Setup Database Connection
         try {
             con = DatabaseConnection.getInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         ResultSet queryResult;
 
         String roomId = request.getParameter("rId");
@@ -133,7 +128,6 @@ public class ChatServiceServlet extends HttpServlet {
     }
 
     private ResultSet getAllMessagesForRoom(int roomID) throws SQLException {
-        ResultSet resultSet;
         String query = String.format("SELECT * From messages where room_id = %s", roomID);
         PreparedStatement preparedStatement = con.prepareStatement(query);
         return preparedStatement.executeQuery();
